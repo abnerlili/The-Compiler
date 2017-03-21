@@ -1,0 +1,36 @@
+Program              ::=  { Statement SEMICO } 
+
+Statement            ::=  OriginStatement 
+                        | ScaleStatement 
+                        | RotStatement 
+                        | ForStatement
+                        | ColorStatement
+                        | PixelSizeStatement
+                        | WindowSizeStatement
+
+OriginStatment       ::=  ORIGIN IS L_BRACKET Expression COMMA Expression R_BRACKET
+
+ScaleStatment        ::=  SCALE IS L_BRACKET Expression COMMA Expression R_BRACKET
+
+RotStatment          ::=  ROT IS Expression
+
+ForStatment          ::=  FOR T FROM Expression TO Expression STEP Expression DRAW L_BRACKET Expression COMMA Expression R_BRACKET
+
+ColorStatement       ::=  COLOR IS L_BRACKET Expression COMMA Expression COMMA Expression R_BRACKET
+
+PixelSizeStatement   ::=  PIXSIZE IS Expression
+
+WindowSizeStatement  ::=  WINDOWSIZE IS L_BRACKET Expression COMMA Expression R_BRACKET
+
+Expression           ::=  Term  { ( PLUS | MINUS) Term } 
+
+Term                 ::=  Factor { ( MUL | DIV ) Factor }
+
+Factor               ::=  ( PLUS | MINUS ) Factor | Component
+
+Component            ::=  Atom [ POWER Component ]
+
+Atom                 ::=  CONST_ID 
+                        | T 
+                        | FUNC L_BRACKET Expression R_BRACKET 
+                        | L_BRACKET Expression R_BRACKET 
